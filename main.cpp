@@ -85,7 +85,6 @@ int locksCount;
 pid_t trainprocess;
 int main(int argc, char *argv[])
 {
-   // std::cout << "Hello World";
     setUpLocks();
     //Probabailty Block
     float probabilty  = -1;
@@ -95,7 +94,7 @@ int main(int argc, char *argv[])
         std::cout << std::endl;
     }
 
-
+    //intiate random engine 
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0, 1);
@@ -110,6 +109,7 @@ int main(int argc, char *argv[])
     setbuf(stdout, NULL);
     setUpMatrix();
     std::cout << trainCount <<std::endl;
+    //maintain train process intiate process 
     while (true) {
         if (train < trainCount && dis(gen) <= probabilty){
             //forking processes
