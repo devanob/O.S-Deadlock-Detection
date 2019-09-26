@@ -13,12 +13,12 @@ void GraphCycle::addEdge(int v, int w)
 
 bool GraphCycle::isCyclicUtil(int v, bool visited[], bool *recStack, std::vector<int> &path) const {
         if (visited[v] == false) {
-            // Mark the current node as visited and part of recursion stack
-            visited[v] = true;
-            recStack[v] = true;
+            // Mark the current node as visited as you need 
+            visited[v] = true; //marked 
+            recStack[v] = true; //marked 
 
             // Recur for all the vertices adjacent to this vertex
-            std::list<int>::iterator i;
+            std::list<int>::iterator i; //created a list interator to keep track of states graph transisiton and movement 
             for (i = adj[v].begin(); i != adj[v].end(); ++i) {
                 if (!visited[*i] && isCyclicUtil(*i, visited, recStack, path)){
                     path.push_back(*i);
@@ -28,20 +28,20 @@ bool GraphCycle::isCyclicUtil(int v, bool visited[], bool *recStack, std::vector
                     return true;}
             }
         }
-        recStack[v] = false; // remove the vertex from recursion stack
+        recStack[v] = false; // remove the vertex from the stack 
         path.pop_back();
         return false;
     }
 
 bool GraphCycle::cycle(std::vector<int> &path) const {
-        // Mark all the vertices as not visited and not part of recursion stack
+        // Mark all the vertices as not visited and not part of the current stack state 
         bool *visited = new bool[V];
         bool *recStack = new bool[V];
         for (int i = 0; i < V; i++) {
             visited[i] = false;
             recStack[i] = false;
         }
-        // Call the recursive helper function to detect cycle in different DFS trees
+        // Call the recursive helper function to detect cycle in different tree states 
         for (int i = 0; i < V; i++){
             path.push_back(i);
             if (isCyclicUtil(i, visited, recStack, path)) {
